@@ -1,0 +1,527 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    color: #333;
+    line-height: 1.6;
+    background: #ffffff; /* Fallback background */
+    background-image: linear-gradient(135deg, #66cdaa 0%, #28a745 50%, #ffffff 100%); /* Green to white gradient */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Ensure the body covers the viewport height */
+}
+
+.navbar {
+    background: #1f8b3a; /* Darker green */
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 80px; /* Adjust based on your logo size */
+    width: auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffc107; /* Yellow for hover */
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Hero Section with Carousel */
+.hero {
+    height: 90vh; /* Set to 90% */
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px; /* Push the hero section below the fixed navbar */
+}
+
+.carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.carousel-slides {
+    display: flex;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth transition */
+    
+}
+
+.carousel-slide {
+    flex: 0 0 100%; /* Each slide takes exactly 100% of the carousel width */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fill the hero section, may crop the image */
+    opacity: 1; /* Fully opaque */
+    display: block;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 1vh; /* Proportional padding */
+    cursor: pointer;
+    font-size: 2vh; /* Proportional font size */
+    width: 10vh; /* Proportional width */
+    height: 10vh; /* Proportional height */
+    line-height: 5vh; /* Center the icon vertically */
+    text-align: center; /* Center the icon horizontally */
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.prev-btn {
+    left: 4vh; /* Proportional positioning */
+}
+
+.next-btn {
+    right: 4vh; /* Proportional positioning */
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 4vh; /* Proportional positioning */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1vh; /* Proportional gap */
+    z-index: 10;
+}
+
+.dot {
+    width: 2vh; /* Proportional size */
+    height: 2vh;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.dot.active {
+    opacity: 1;
+    background: #ffc107; /* Yellow for active dot */
+}
+
+.section {
+    /* Card-like design */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow for raised effect */
+    max-width: 1200px; /* Limit the width */
+    margin: 2rem auto; /* Center the section with margin on top and bottom */
+    padding: 3rem; /* Adjusted padding for better spacing */
+    text-align: center;
+    margin-top: 100px; /* Ensure the section is below the fixed navbar on contact page */
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    color: #007bff; /* Blue for headings */
+    margin-bottom: 2rem;
+}
+
+/* Entry animation for sections */
+.section[data-animate] {
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Start slightly below */
+}
+
+.section.animate {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.categories-grid, .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.category-card, .award-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.category-card:hover, .award-card:hover {
+    transform: translateY(-10px);
+}
+
+.math-card {
+    border-left: 5px solid #007bff; /* Blue for Math */
+}
+
+.english-card {
+    border-left: 5px solid #dc3545; /* Red for English */
+}
+
+.category-card h3 {
+    color: #28a745; /* Green for category titles */
+    margin-bottom: 1rem;
+}
+
+/* Style for category images */
+.category-image {
+    display: block;
+    width: 150px; /* Fixed width for consistency */
+    height: 150px; /* Fixed height for consistency */
+    margin: 0 auto 1rem; /* Center the image with margin below */
+    padding: 10px;
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid #ddd; /* Subtle border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    object-fit: fill; /* Ensure the image fits within the dimensions */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-image:hover {
+    transform: scale(1.1); /* Slight scale increase on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.award-card {
+    background: #fff;
+    border-left: 5px solid #ffc107; /* Yellow for awards */
+}
+
+.insta-grid {
+    display: block; /* Reverted to original display: block */
+    margin-top: 2rem;
+    max-width: 1200px; /* Match the section's max-width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style the Curator.io feed container */
+#curator-feed-default-feed-layout {
+    width: 100%; /* Reverted to original width: 100% */
+}
+
+/* Style individual posts within the Curator.io feed */
+#curator-feed-default-feed-layout .crt-post {
+    position: relative; /* For positioning the overlay */
+    background: #fff; /* White background for the post */
+    border: 3px solid #fd7e14; /* Orange border */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+    margin: 0.5rem; /* Spacing between posts */
+    overflow: hidden; /* Ensure content stays within rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Gradient overlay on the post image */
+#curator-feed-default-feed-layout .crt-post::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.2) 0%, rgba(255, 165, 0, 0.2) 100%); /* Green to orange gradient overlay */
+    pointer-events: none; /* Allow clicks to pass through */
+    z-index: 1;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+/* Inner shadow for depth */
+#curator-feed-default-feed-layout .crt-post::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); /* Inner shadow */
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Ensure the post content is above the overlay */
+#curator-feed-default-feed-layout .crt-post > * {
+    position: relative;
+    z-index: 3;
+}
+
+/* Hover effect */
+#curator-feed-default-feed-layout .crt-post:hover {
+    transform: translateY(-5px); /* Slight lift */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-color: #28a745; /* Change border to green on hover */
+}
+
+#curator-feed-default-feed-layout .crt-post:hover::before {
+    opacity: 0.7; /* Increase overlay opacity on hover */
+}
+
+/* Entry animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to posts when they become visible */
+#curator-feed-default-feed-layout .crt-post.animate {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger the animation for each post */
+#curator-feed-default-feed-layout .crt-post:nth-child(1) {
+    animation-delay: 0.1s;
+}
+#curator-feed-default-feed-layout .crt-post:nth-child(2) {
+    animation-delay: 0.2s;
+}
+#curator-feed-default-feed-layout .crt-post:nth-child(3) {
+    animation-delay: 0.3s;
+}
+#curator-feed-default-feed-layout .crt-post:nth-child(4) {
+    animation-delay: 0.4s;
+}
+#curator-feed-default-feed-layout .crt-post:nth-child(5) {
+    animation-delay: 0.5s;
+}
+#curator-feed-default-feed-layout .crt-post:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* Style the "Powered by Curator.io" link */
+.crt-logo.crt-tag {
+    color: #28a745; /* Match the green theme */
+    font-size: 0.9rem;
+    text-align: center;
+    display: block;
+    margin-top: 1rem;
+    width: 100%; /* Ensure it spans the container */
+}
+
+/* Contact Page Styles */
+.contact-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contact-form, .contact-info {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.contact-form h3, .contact-info h3 {
+    color: #28a745; /* Green for headings */
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #28a745; /* Green border on focus */
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resizing only */
+}
+
+.submit-btn {
+    background: #28a745; /* Green button */
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #218838; /* Darker green on hover */
+    transform: translateY(-2px);
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+}
+
+.contact-info strong {
+    color: #007bff; /* Blue for labels */
+}
+
+footer {
+    background: rgba(30, 125, 52, 0.9); /* Darker green */
+    color: #fff;
+    text-align: center;
+    padding: 2rem 1rem; /* Increased padding for more content */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-contact {
+    margin-top: 1rem;
+}
+
+.footer-contact p {
+    margin: 0.5rem 0;
+}
+
+.footer-contact a {
+    color: #ffc107; /* Yellow for links */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-contact a:hover {
+    color: #fff; /* White on hover */
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #1f8b3a; /* Match the darker navbar color */
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+
+    .section {
+        margin: 1rem; /* Reduced margin on smaller screens */
+        padding: 2rem; /* Adjusted padding for smaller screens */
+    }
+
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-form, .contact-info {
+        max-width: 100%;
+    }
+
+    .category-image {
+        width: 80px; /* Smaller size on mobile */
+        height: 80px;
+    }
+
+    .footer-contact {
+        text-align: center;
+    }
+}

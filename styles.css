@@ -61,6 +61,50 @@ body {
     outline: none;
 }
 
+/* Dropdown Menu */
+.dropdown { position: relative; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 8px;
+}
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover { background: #f5f5f5; }
+
+/* Mobile Dropdown */
+@media (max-width: 768px) {
+    .dropdown.active .dropdown-content {
+        display: block;
+        position: static;
+        box-shadow: none;
+    }
+}
+
+/* Results Table */
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+.results-table th, .results-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.results-table th { background: #28a745; color: white; }
+.results-table tr:nth-child(even) { background: #f9f9f9; }
+
+
 .hamburger {
     display: none;
     font-size: 1.5rem;
@@ -333,6 +377,84 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #28a745;
+    color: white;
+    padding: 15px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    background: #218838;
+    transform: translateY(-3px);
+}
+
+.whatsapp-float i {
+    font-size: 28px;
+}
+
+.whatsapp-text {
+    font-size: 16px;
+    font-weight: 600;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .whatsapp-text {
+        display: block;
+    }
+}
+
+/* Results Page Enhancements */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+    color: #666;
+}
+.error {
+    padding: 2rem;
+    background: #ffe6e6;
+    border: 2px solid #ff4444;
+    border-radius: 8px;
+    color: #cc0000;
+    margin: 2rem auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.error small {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+    color: #666;
+}
+
+
+.results-table td {
+    vertical-align: middle;
+}
+
+/* Category Badges */
+.results-table td:contains("Category") {
+    background: #e9ecef;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
 /* Footer Styles */
 footer {
     background: rgba(30, 125, 52, 0.9);
@@ -484,6 +606,8 @@ footer {
     outline: none;
 }
 
+
+
 @media (max-width: 768px) {
     .hamburger {
         display: block;
@@ -527,8 +651,8 @@ footer {
         padding: 2rem;
     }
     .category-image {
-        width: 200px;
-        height: 200px;
+        width: 100px;
+        height: 100px;
     }
     .brochure-img {
         width: 90%;

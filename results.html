@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKO 2025 Results</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar" role="navigation" aria-label="Main Navigation">
+            <div class="logo-container">
+                <img src="iko_text.png" alt="IKO 2025 Logo" class="logo-img desktop-logo">
+                <img src="iko_circle.png" alt="IKO Mobile Logo" class="logo-img mobile-logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#categories">Categories</a></li>
+                <li><a href="index.html#awards">Awards</a></li>
+                <li class="dropdown">
+                    <a href="results.html" class="dropbtn">Results <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="results.html?sheet=math">Mathematics</a>
+                        <a href="results.html?sheet=english">English</a>
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="hamburger" aria-label="Toggle Menu">☰</button>
+        </nav>
+    </header>
+
+    <section id="results" class="section" style="margin-top: 100px;">
+        <h2 id="results-heading">Olympiad Results 2025</h2>
+            <div id="results-container"></div>
+    </section>
+
+    <script>
+        // Configuration
+        const SHEET_URLS = {
+            math: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXvOu3YNwKA0o3_BxnZoAzBPIKBlYvP--zxOYAK2PiEaN8F4OC37iVH_g3BREXDsLDFlLdzgZ-KaC1/pub?gid=0&single=true&output=csv',
+            english: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXvOu3YNwKA0o3_BxnZoAzBPIKBlYvP--zxOYAK2PiEaN8F4OC37iVH_g3BREXDsLDFlLdzgZ-KaC1/pub?gid=680911392&single=true&output=csv'
+        };
+
+        async function loadResults() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Fix parameter name from 'sheet' to 'subject' or update links
+            const subject = urlParams.get('sheet')?.toLowerCase() || 'math'; // Changed to 'sheet'
+            
+            const container = document.getElementById('results-container');
+            const heading = document.getElementById('results-heading');
+
+            try {
+                // Validate container elements exist
+                if (!container || !heading) {
+                    throw new Error('Page elements missing');
+                }
+
+                // Validate subject parameter
+                if (!Object.keys(SHEET_URLS).includes(subject)) {
+                    throw new Error('Invalid subject parameter');
+                }
+
+                // Show loading state
+                container.innerHTML = '<div class="loading">Loading results...</div>';
+                heading.textContent = `${subject.toUpperCase()} Results 2025`;
+
+                // Fetch data
+                const response = await fetch(SHEET_URLS[subject]);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                
+                const csvData = await response.text();
+                if (!csvData) throw new Error('Empty response from server');
+
+                // Process CSV data
+                const rows = csvData.split('\n').filter(row => row.trim() !== '');
+                if (rows.length < 2) throw new Error('No results available');
+
+                const headers = rows[0].split(',').map(h => h.trim());
+                const data = rows.slice(1).map(row => {
+                    const values = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    return headers.reduce((obj, header, index) => {
+                        obj[header] = values[index]?.replace(/"/g, '').trim();
+                        return obj;
+                    }, {});
+                });
+
+                // Generate HTML table
+                const html = `
+                    <table class="results-table">
+                        <thead>
+                            <tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>
+                        </thead>
+                        <tbody>
+                            ${data.map(row => `
+                                <tr>
+                                    ${headers.map(h => `<td>${row[h] || '-'}</td>`).join('')}
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+
+                container.innerHTML = html;
+
+            } catch (error) {
+                console.error('Error:', error);
+                if (container) {
+                    container.innerHTML = `
+                        <div class="error">
+                            <p>⚠️ Failed to load results</p>
+                            <small>${error.message}</small>
+                            <p>Try these steps:</p>
+                            <ul style="text-align: left; margin: 10px 0;">
+                                <li>Refresh the page</li>
+                                <li>Check internet connection</li>
+                                <li>Contact support if problem persists</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Initialize after DOM loads
+        window.addEventListener('DOMContentLoaded', loadResults);
+    </script>
+
+
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/18474813608" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-text">How can I help you?</span>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

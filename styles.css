@@ -423,36 +423,12 @@ body {
     font-style: italic;
     color: #666;
 }
-.error {
-    padding: 2rem;
-    background: #ffe6e6;
-    border: 2px solid #ff4444;
-    border-radius: 8px;
-    color: #cc0000;
-    margin: 2rem auto;
-    max-width: 600px;
-    text-align: center;
-}
 
 .error small {
     display: block;
     margin-top: 0.5rem;
     font-size: 0.9em;
     color: #666;
-}
-
-
-.results-table td {
-    vertical-align: middle;
-}
-
-/* Category Badges */
-.results-table td:contains("Category") {
-    background: #e9ecef;
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 0.9em;
-    font-weight: 500;
 }
 
 /* Footer Styles */
@@ -604,6 +580,44 @@ footer {
     background: #218838;
     transform: translateY(-2px);
     outline: none;
+}
+
+/* Results Table - General */
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+}
+
+.results-table th, 
+.results-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    min-width: 120px;
+}
+
+.results-table th {
+    background-color: #28a745;
+    color: white;
+    font-weight: 600;
+}
+/* Loading and Error States */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+.error {
+    padding: 1rem;
+    background: #ffe6e6;
+    border: 2px solid #ff4444;
+    border-radius: 8px;
+    color: #cc0000;
+    margin: 1rem;
 }
 
 
